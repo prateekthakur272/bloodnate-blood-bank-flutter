@@ -13,7 +13,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.blue
+        primaryColor: Colors.redAccent[100],
+        primarySwatch: Colors.brown
       ),
       home: const Login(),
     );
