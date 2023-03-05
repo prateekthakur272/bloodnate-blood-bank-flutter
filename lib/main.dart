@@ -16,7 +16,11 @@ class App extends StatelessWidget {
         primaryColor: Colors.redAccent[100],
         primarySwatch: Colors.brown
       ),
-      home: const Login(),
+      routes: {
+        '/':(context) => const Login(),
+        '/home':(context) => const Home()
+      },
+      initialRoute: '/',
     );
   }
 }

@@ -21,10 +21,6 @@ class _HomeState extends State<Home> {
           onPressed: () => {},
         ),
       ),
-      body: Container(
-        margin: const EdgeInsets.only(top: 16,left: 16,right: 16),
-        color: Colors.lightBlue,
-      ),
     );
   }
 }

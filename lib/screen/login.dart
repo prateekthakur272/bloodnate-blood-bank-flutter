@@ -52,7 +52,9 @@ class _LoginState extends State<Login> {
               ),
               const Padding(padding: EdgeInsets.only(top: 24)),
               GestureDetector(
-                onTap: () => {},
+                onTap: (){
+                  Navigator.pushNamed(context, '/home');
+                },
                 child: Container(
                   padding: const EdgeInsets.all(24),
                   decoration: const BoxDecoration(
