@@ -47,8 +47,9 @@ class _LoginState extends State<Login> {
                   ),
                   label: Text("Phone number"),
                   filled: true,
-                  fillColor: Color(0xf1f1f1f1)
+                  fillColor: Color(0xf1f1f1f1),
                 ),
+                keyboardType: TextInputType.phone,
               ),
               const Padding(padding: EdgeInsets.only(top: 24)),
               GestureDetector(
