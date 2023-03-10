@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset('assets/ic_login.png', height: 160, width: 160),
+                    Image.asset('assets/img_login.png', height: 120, width: 120),
                     const Padding(padding: EdgeInsets.only(top: 24)),
                     const Text(
                       "Welcome to Bloodnate, Login to continue",
