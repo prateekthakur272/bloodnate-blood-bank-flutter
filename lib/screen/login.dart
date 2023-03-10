@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset('assets/ic_login.png',height: 160,width: 160,),
+              Image.asset('assets/ic_login.png',height: 160,width: 160),
               const Padding(padding: EdgeInsets.only(top: 24)),
               const Text(
                 "Welcome to Bloodnate, Login to continue",
@@ -43,7 +43,7 @@ class _LoginState extends State<Login> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.all(Radius.circular(16))
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
                   label: Text("Phone number"),
                   filled: true,
