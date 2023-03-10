@@ -38,7 +38,7 @@ class _CreateAccountState extends State<CreateAccount> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-                Image.asset('assets/ic_signup.png',height: 120,width: 120),
+                Image.asset('assets/img_create_account.png',height: 120,width: 120),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
                 const Text(
                     "Please enter following details to create an account",
