@@ -1,3 +1,4 @@
+import 'package:bloodnate/screen/create_account.dart';
 import 'package:bloodnate/screen/home.dart';
 import 'package:bloodnate/screen/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,11 +24,12 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.redAccent[100],
-        primarySwatch: Colors.brown
+        primarySwatch: Colors.blue,
       ),
       routes: {
         '/':(context) => const Login(),
-        '/home':(context) => const Home()
+        '/home':(context) => const Home(),
+        '/create_account':(context) => CreateAccount()
       },
       initialRoute: '/',
     );

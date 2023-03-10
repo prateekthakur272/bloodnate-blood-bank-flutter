@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../widget/button.dart';
+import '../widget/custom_password_field.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -46,9 +47,9 @@ class _LoginState extends State<Login> {
                       textAlign: TextAlign.center,
                     ),
                     const Padding(padding: EdgeInsets.only(top: 24)),
-                    CustomTextField("Email", email),
+                    CustomTextField("Email", email,TextInputType.emailAddress),
                     const Padding(padding: EdgeInsets.only(top: 24)),
-                    CustomTextField("Password", password),
+                    CustomPasswordField("Password", password),
                     const Padding(padding: EdgeInsets.only(top: 8)),
                     Align(
                       alignment: Alignment.bottomRight,
@@ -65,17 +66,21 @@ class _LoginState extends State<Login> {
                       FirebaseAuth.instance
                           .signInWithEmailAndPassword(
                               email: email.text, password: password.text)
-                          .then((value) => {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content: Text("Signed In"),
-                                  backgroundColor: Colors.green,
-                                ))
-                          },
+                          .then(
+                              (value) => {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text("Signed In"),
+                                      backgroundColor: Colors.green,
+                                    )),
+                                    //Navigator.pop(context),
+                                    Navigator.pushNamed(context, '/home'),
+                                  },
                               onError: (e) => {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(const SnackBar(
-                                      content: Text("Invalid Username or Password"),
+                                      content:
+                                          Text("Invalid Username or Password"),
                                       backgroundColor: Colors.red,
                                     ))
                                   });
@@ -88,11 +93,7 @@ class _LoginState extends State<Login> {
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                       onTap: () {
-                        const snackBar = SnackBar(
-                          content: Text("Create Account"),
-                          backgroundColor: Colors.green,
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        Navigator.pushNamed(context, '/create_account');
                       },
                     ),
                     const Padding(padding: EdgeInsets.only(top: 12)),

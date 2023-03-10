@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -23,51 +24,19 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Center(
-          child: Column(
-            children: [
-              const SizedBox(height: 48,),
-              Image.asset('assets/ic_donor.png',height:240,width:240,),
-              const SizedBox(height: 32,),
-              GestureDetector(
-                child: Container(
-                  width: 240,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(24),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.all(Radius.circular(16))
-                  ),
-                  child: const Text(
-                    "Donate Blood",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 32,),
-              GestureDetector(
-                child: Container(
-                  width: 240,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(24),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.all(Radius.circular(16))
-                  ),
-                  child: const Text(
-                    "Search Blood",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-                onTap: (){},
-              )
-            ],
+          child: Container(
+            constraints: const BoxConstraints(
+              maxWidth: 480
+            ),
+            child: Column(
+              children: [
+                Text(FirebaseAuth.instance.currentUser?.email??"No email"),
+                Text(FirebaseAuth.instance.currentUser?.displayName??"No Name"),
+                Text(FirebaseAuth.instance.currentUser?.photoURL??"No url"),
+              ],
+            ),
           ),
         ),
       ),

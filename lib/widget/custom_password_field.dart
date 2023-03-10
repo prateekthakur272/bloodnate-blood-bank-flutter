@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomPasswordField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
-  final TextInputType inputType;
-
-  const CustomTextField(this.label,this.controller,this.inputType,{Key? key}) : super(key: key);
+  const CustomPasswordField(this.label,this.controller,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,8 @@ class CustomTextField extends StatelessWidget {
           filled: true,
           fillColor: const Color(0xf1f1f1f1),
         ),
-        keyboardType: inputType,
+        keyboardType: TextInputType.text,
+        obscureText: true,
       ),
     );
   }
