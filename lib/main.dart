@@ -1,8 +1,17 @@
 import 'package:bloodnate/screen/home.dart';
 import 'package:bloodnate/screen/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main(){
+import 'firebase_options.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform
+  );
+  FirebaseAuth.instance.verifyPhoneNumber(verificationCompleted: (p){}, verificationFailed: (p){}, codeSent: (c,r){}, codeAutoRetrievalTimeout: (r){},phoneNumber: "+91 9685754098");
   runApp(const App());
 }
 
