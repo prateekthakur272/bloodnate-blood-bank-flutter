@@ -1,6 +1,6 @@
 import 'package:bloodnate/widget/button.dart';
-import 'package:bloodnate/widget/custom_password_field.dart';
-import 'package:bloodnate/widget/custom_text_field.dart';
+import 'package:bloodnate/widget/password_input_field.dart';
+import 'package:bloodnate/widget/text_input_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class CreateAccount extends StatefulWidget {
@@ -50,18 +50,18 @@ class _CreateAccountState extends State<CreateAccount> {
                   textAlign: TextAlign.center,
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-                CustomTextField("Name",TextEditingController(),TextInputType.name),
+                TextInputField("Name",TextEditingController(),TextInputType.name),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-                CustomTextField("Email",email,TextInputType.emailAddress),
+                TextInputField("Email",email,TextInputType.emailAddress),
                 const Padding(padding: EdgeInsets.symmetric(vertical:12)),
                 const Align(
                     alignment: Alignment.centerLeft,
                     child: Text("Please enter a strong password",)
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
-                CustomPasswordField("Password", password),
+                PasswordInputField("Password", password),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-                CustomPasswordField("Confirm password", confirmPassword),
+                PasswordInputField("Confirm password", confirmPassword),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                 const Divider(thickness: 2,),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 4)),

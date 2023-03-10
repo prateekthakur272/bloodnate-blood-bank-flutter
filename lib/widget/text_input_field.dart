@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class TextInputField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final TextInputType inputType;
 
-  const CustomTextField(this.label,this.controller,this.inputType,{Key? key}) : super(key: key);
+  const TextInputField(this.label,this.controller,this.inputType,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

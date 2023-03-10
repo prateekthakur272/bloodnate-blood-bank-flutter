@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CustomPasswordField extends StatelessWidget {
+class PasswordInputField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
-  const CustomPasswordField(this.label,this.controller,{Key? key}) : super(key: key);
+  const PasswordInputField(this.label,this.controller,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
