@@ -1,3 +1,4 @@
+import 'package:bloodnate/widget/drawer/drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -18,10 +19,6 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () => {},
-        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -40,6 +37,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+      drawer:const DrawerHome()
     );
   }
 }
