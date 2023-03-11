@@ -1,6 +1,7 @@
 import 'package:bloodnate/screen/create_account.dart';
 import 'package:bloodnate/screen/home.dart';
 import 'package:bloodnate/screen/login.dart';
+import 'package:bloodnate/screen/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,8 @@ class App extends StatelessWidget {
       routes: {
         '/':(context) => const Login(),
         '/home':(context) => const Home(),
-        '/create_account':(context) => const CreateAccount()
+        '/create_account':(context) => const CreateAccount(),
+        '/home/profile':(context)=> const Profile()
       },
       initialRoute: '/',
     );

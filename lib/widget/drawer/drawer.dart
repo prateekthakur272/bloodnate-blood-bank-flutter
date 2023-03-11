@@ -12,7 +12,16 @@ class DrawerHome extends StatelessWidget {
         children:[
           const DrawerHomeHeader(),
           ListTile(
+            title: const Text("Go to profile"),
+            leading: const Icon(Icons.person),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/home/profile');
+            },
+          ),
+          ListTile(
             title: const Text("Sign out"),
+            leading: const Icon(Icons.exit_to_app),
             onTap: () async {
               Navigator.pop(context);
               await FirebaseAuth.instance.signOut().then((value) => {
@@ -28,6 +37,7 @@ class DrawerHome extends StatelessWidget {
           const Divider(thickness: 1,),
           const ListTile(
             title: Text("Version 1.0"),
+            leading: Icon(Icons.error),
           ),
         ],
       ),
