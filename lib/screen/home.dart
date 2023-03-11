@@ -1,5 +1,6 @@
+import 'package:bloodnate/widget/button.dart';
+import 'package:bloodnate/widget/card.dart';
 import 'package:bloodnate/widget/drawer/drawer.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -29,10 +30,14 @@ class _HomeState extends State<Home> {
             ),
             child: Column(
               children: [
-                Text(FirebaseAuth.instance.currentUser?.email??"No email"),
-                Text(FirebaseAuth.instance.currentUser?.displayName??"No Name"),
-                Text(FirebaseAuth.instance.currentUser?.photoURL??"No url"),
-                Text(FirebaseAuth.instance.currentUser.toString()),
+                const Padding(padding: EdgeInsets.symmetric(vertical: 16)),
+                Image.asset('assets/img_bloodnate.png',width: 160,height: 160,),
+                const Padding(padding: EdgeInsets.symmetric(vertical: 16)),
+                Button("Donate blood", (){}),
+                const Padding(padding: EdgeInsets.symmetric(vertical: 16)),
+                Button("Find blood", (){}),
+                const Padding(padding: EdgeInsets.symmetric(vertical: 16)),
+                const InfoCard()
               ],
             ),
           ),
