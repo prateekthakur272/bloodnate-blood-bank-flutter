@@ -1,6 +1,6 @@
+import 'package:bloodnate/auth.dart';
 import 'package:bloodnate/widget/button_with_start_icon.dart';
 import 'package:bloodnate/widget/text_input_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -64,27 +64,7 @@ class _LoginState extends State<Login> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 24)),
                     Button("Sign In", () {
-                      FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: email.text, password: password.text)
-                          .then(
-                              (value) => {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: Text("Signed In"),
-                                      backgroundColor: Colors.green,
-                                    )),
-                                    //Navigator.pop(context),
-                                    Navigator.pushNamed(context, '/home'),
-                                  },
-                              onError: (e) => {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content:
-                                          Text("Invalid Username or Password"),
-                                      backgroundColor: Colors.red,
-                                    ))
-                                  });
+                      Auth.signInWithEmailPassword(context, email.text, password.text);
                     }),
                     const Padding(padding: EdgeInsets.only(top: 12)),
                     GestureDetector(

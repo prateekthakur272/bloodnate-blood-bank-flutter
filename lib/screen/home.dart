@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
                 Text(FirebaseAuth.instance.currentUser?.email??"No email"),
                 Text(FirebaseAuth.instance.currentUser?.displayName??"No Name"),
                 Text(FirebaseAuth.instance.currentUser?.photoURL??"No url"),
+                Text(FirebaseAuth.instance.currentUser.toString()),
               ],
             ),
           ),

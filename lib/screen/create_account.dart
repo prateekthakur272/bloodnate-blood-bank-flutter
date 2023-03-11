@@ -1,7 +1,7 @@
+import 'package:bloodnate/auth.dart';
 import 'package:bloodnate/widget/button.dart';
 import 'package:bloodnate/widget/password_input_field.dart';
 import 'package:bloodnate/widget/text_input_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class CreateAccount extends StatefulWidget {
   const CreateAccount({Key? key}) : super(key: key);
@@ -12,6 +12,7 @@ class CreateAccount extends StatefulWidget {
 
 class _CreateAccountState extends State<CreateAccount> {
 
+  final TextEditingController name = TextEditingController();
   final TextEditingController email =TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
@@ -50,7 +51,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   textAlign: TextAlign.center,
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-                TextInputField("Name",TextEditingController(),TextInputType.name),
+                TextInputField("Name",name,TextInputType.name),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
                 TextInputField("Email",email,TextInputType.emailAddress),
                 const Padding(padding: EdgeInsets.symmetric(vertical:12)),
@@ -66,47 +67,16 @@ class _CreateAccountState extends State<CreateAccount> {
                 const Divider(thickness: 2,),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                 Button("Create Account",() async {
-                  if(password.text==confirmPassword.text){
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text)
-                        .then((value){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Account created successfully"),backgroundColor: Colors.green,)
-                      );
-                    }).onError((error, stackTrace){
-                      print((error as FirebaseAuthException).code);
-                      switch((error as FirebaseAuthException).code){
-                        case 'weak-password':{
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Weak Password"),backgroundColor: Colors.red,)
-                          );
-                          break;
-                        }
-                        case 'missing-email':
-                        case 'invalid-email':
-                          {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("Please enter a valid email address"),backgroundColor: Colors.red,)
-                            );
-                            break;
-                          }
-                        case 'email-already-in-use':{
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Email already in use"),backgroundColor: Colors.red,)
-                          );
-                          break;
-                        }
-                        case 'network-request-failed':{
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("No internet connection"),backgroundColor: Colors.red,)
-                          );
-                          break;
-                        }
-                      }
-                    });
-                  }else{
+                  if(password.text!=confirmPassword.text){
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Confirm password did not matched"),backgroundColor: Colors.red,)
                     );
+                  }else if(name.text.isEmpty){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Name cannot be blank"),backgroundColor: Colors.red,)
+                    );
+                  }else {
+                    Auth.createAccountWithEmailPassword(context, name.text, email.text, password.text);
                   }
                 }),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
