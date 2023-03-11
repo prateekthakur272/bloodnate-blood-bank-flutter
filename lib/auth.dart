@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Auth{
+  static final user = FirebaseAuth.instance.currentUser;
   static signInWithEmailPassword(BuildContext context,email,password) async {
     await FirebaseAuth.instance
         .signInWithEmailAndPassword(
