@@ -14,7 +14,6 @@ class Auth{
             content: Text("Signed In"),
             backgroundColor: Colors.green,
           ));
-          Navigator.pop(context);
           Navigator.pushNamed(context, '/home');
         }).onError((error, stackTrace){
           ScaffoldMessenger.of(context).showSnackBar(
