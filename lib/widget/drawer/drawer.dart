@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bloodnate/auth.dart';
 import 'package:flutter/material.dart';
 
 import 'drawer_header.dart';
@@ -23,15 +23,7 @@ class DrawerHome extends StatelessWidget {
             title: const Text("Sign out"),
             leading: const Icon(Icons.exit_to_app),
             onTap: () async {
-              Navigator.pop(context);
-              await FirebaseAuth.instance.signOut().then((value) => {
-                Navigator.popUntil(context,ModalRoute.withName('/')),
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                    content: Text("Signed out successfully"),
-                  )
-                )
-              });
+              Auth.signOut(context);
             },
           ),
           const Divider(thickness: 1,),
