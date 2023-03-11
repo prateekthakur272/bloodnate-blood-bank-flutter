@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 class ButtonWithStartIcon extends StatelessWidget {
   final String text;
   final IconData icon;
-  const ButtonWithStartIcon(this.text,this.icon,{Key? key}) : super(key: key);
+  final Function onClick;
+  const ButtonWithStartIcon(this.text,this.icon,this.onClick,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-
+        onClick();
       },
       child: Material(
         elevation: 8,

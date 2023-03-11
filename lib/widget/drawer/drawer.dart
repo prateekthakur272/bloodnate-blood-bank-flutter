@@ -25,6 +25,7 @@ class DrawerHome extends StatelessWidget {
               });
             },
           ),
+          const Divider(thickness: 1,),
           const ListTile(
             title: Text("Version 1.0"),
           ),

@@ -36,7 +36,8 @@ class _LoginState extends State<Login> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset('assets/img_login.png', height: 120, width: 120),
+                    Image.asset('assets/img_login.png',
+                        height: 120, width: 120),
                     const Padding(padding: EdgeInsets.only(top: 24)),
                     const Text(
                       "Welcome to Bloodnate, Login to continue",
@@ -47,7 +48,7 @@ class _LoginState extends State<Login> {
                       textAlign: TextAlign.center,
                     ),
                     const Padding(padding: EdgeInsets.only(top: 24)),
-                    TextInputField("Email", email,TextInputType.emailAddress),
+                    TextInputField("Email", email, TextInputType.emailAddress),
                     const Padding(padding: EdgeInsets.only(top: 24)),
                     PasswordInputField("Password", password),
                     const Padding(padding: EdgeInsets.only(top: 8)),
@@ -101,11 +102,13 @@ class _LoginState extends State<Login> {
                       thickness: 2,
                     ),
                     const Padding(padding: EdgeInsets.only(top: 12)),
-                    const ButtonWithStartIcon(
-                        "Sign in with google", FontAwesomeIcons.google),
+                    ButtonWithStartIcon(
+                        "Sign in with google", FontAwesomeIcons.google, () {
+                          Navigator.pushNamed(context, '/create_account_with_provider');
+                    }),
                     const Padding(padding: EdgeInsets.only(top: 24)),
-                    const ButtonWithStartIcon(
-                        "Sign in with Apple", FontAwesomeIcons.apple),
+                    ButtonWithStartIcon(
+                        "Sign in with Apple", FontAwesomeIcons.apple, () {}),
                     const Padding(padding: EdgeInsets.only(top: 24)),
                   ],
                 ),
