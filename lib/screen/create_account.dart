@@ -65,8 +65,49 @@ class _CreateAccountState extends State<CreateAccount> {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                 const Divider(thickness: 2,),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
-                Button("Create Account",(){
-                  FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text);
+                Button("Create Account",() async {
+                  if(password.text==confirmPassword.text){
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text)
+                        .then((value){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Account created successfully"),backgroundColor: Colors.green,)
+                      );
+                    }).onError((error, stackTrace){
+                      print((error as FirebaseAuthException).code);
+                      switch((error as FirebaseAuthException).code){
+                        case 'weak-password':{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Weak Password"),backgroundColor: Colors.red,)
+                          );
+                          break;
+                        }
+                        case 'missing-email':
+                        case 'invalid-email':
+                          {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text("Please enter a valid email address"),backgroundColor: Colors.red,)
+                            );
+                            break;
+                          }
+                        case 'email-already-in-use':{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Email already in use"),backgroundColor: Colors.red,)
+                          );
+                          break;
+                        }
+                        case 'network-request-failed':{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("No internet connection"),backgroundColor: Colors.red,)
+                          );
+                          break;
+                        }
+                      }
+                    });
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Confirm password did not matched"),backgroundColor: Colors.red,)
+                    );
+                  }
                 }),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                 GestureDetector(
