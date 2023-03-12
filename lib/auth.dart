@@ -14,7 +14,6 @@ class Auth{
             content: Text("Signed In"),
             backgroundColor: Colors.green,
           ));
-          Navigator.pushNamed(context, '/home');
         }).onError((error, stackTrace){
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text((error as FirebaseAuthException).code),backgroundColor: Colors.red,)
@@ -44,7 +43,7 @@ class Auth{
           actions: [
             TextButton(onPressed: () async {
               await FirebaseAuth.instance.signOut().then((value) => {
-                Navigator.popUntil(context,ModalRoute.withName('/')),
+                Navigator.pop(context),
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text("Signed out successfully"),
