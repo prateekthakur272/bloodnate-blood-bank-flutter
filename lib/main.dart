@@ -1,7 +1,6 @@
 import 'package:bloodnate/screen/create_account.dart';
-import 'package:bloodnate/screen/home.dart';
-import 'package:bloodnate/screen/login.dart';
 import 'package:bloodnate/screen/profile.dart';
+import 'package:bloodnate/screen_controller/login_home_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -26,8 +25,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/':(context) => const Login(),
-        '/home':(context) => const Home(),
+        '/':(context) => const LoginHomeController(),
         '/create_account':(context) => const CreateAccount(),
         '/home/profile':(context)=> const Profile()
       },
