@@ -53,6 +53,7 @@ class Auth{
           );
           await value.user?.updateDisplayName(name).then((v){
             value.user?.updateDisplayName(name);
+            value.user?.sendEmailVerification();
             Navigator.pop(context);
           });
     }).onError((error, stackTrace){
