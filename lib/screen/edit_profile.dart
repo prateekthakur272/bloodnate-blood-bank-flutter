@@ -1,4 +1,5 @@
 import 'package:bloodnate/auth.dart';
+import 'package:bloodnate/database/repository.dart';
 import 'package:bloodnate/widget/button.dart';
 import 'package:bloodnate/widget/text_input_field.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,12 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     name.text = user?.displayName??"";
     email.text = user?.email??"";
+    final repository = Repository(context);
+    repository.userCollection.doc(Auth.user?.uid).get().then((value){
+      phone.text = value.data()!['phone']??"";
+      address.text = value.data()!['address']??"";
+      pinCode.text = value.data()!['pin_code']??"";
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text("Edit Details"),
@@ -54,7 +61,15 @@ class _EditProfileState extends State<EditProfile> {
               const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
               const Divider(thickness: 1,color: Colors.grey,),
               const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
-              Button("Save Changes", (){}),
+              Button("Save Changes", (){
+                repository.updateUser({
+                  "name":name.text.trim(),
+                  "email":email.text.trim(),
+                  "phone":phone.text.trim(),
+                  "address":address.text.trim(),
+                  "pin_code":pinCode.text.trim(),
+                });
+              }),
               const Padding(padding: EdgeInsets.symmetric(vertical: 12)),
             ],
           ),
