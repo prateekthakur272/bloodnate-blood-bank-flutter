@@ -59,7 +59,9 @@ class _LoginState extends State<Login> {
                           "Forgot password",
                           style: TextStyle(color: Colors.grey),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, '/forgot_password');
+                        },
                       ),
                     ),
                     const Padding(padding: EdgeInsets.only(top: 24)),

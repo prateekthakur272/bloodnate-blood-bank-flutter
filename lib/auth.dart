@@ -7,15 +7,7 @@ class Auth{
   }
 
   static signInWithEmailPassword(BuildContext context,email,password) async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context){
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-    );
+    _showLoader(context);
     await FirebaseAuth.instance
         .signInWithEmailAndPassword(
         email: email, password: password)
@@ -36,15 +28,7 @@ class Auth{
   }
 
   static createAccountWithEmailPassword(BuildContext context,String name,String email,String password) async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context){
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-    );
+    _showLoader(context);
     await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password)
         .then((value)async{
           Navigator.pop(context);
@@ -86,6 +70,33 @@ class Auth{
             }, child: const Text("No")),
           ],
         )
+    );
+  }
+
+  static resetPasswordWithEmail(BuildContext context,String email){
+    _showLoader(context);
+    FirebaseAuth.instance.sendPasswordResetEmail(email: email).then((value){
+      Navigator.popUntil(context,ModalRoute.withName('/'));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Password reset link sent to $email"))
+      );
+    }).onError((error, stackTrace){
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text((error as FirebaseAuthException).code),backgroundColor: Colors.red,)
+      );
+    });
+  }
+
+  static _showLoader(BuildContext context){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context){
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
     );
   }
 }
