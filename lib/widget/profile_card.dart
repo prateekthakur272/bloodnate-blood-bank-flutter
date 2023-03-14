@@ -1,3 +1,4 @@
+import 'package:bloodnate/database/repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -37,8 +38,26 @@ class ProfileCard extends StatelessWidget {
             const Divider(thickness: 1,color: Colors.grey,),
             Text(user.email!),
             Text(user.emailVerified?"Verified":"Not verified"),
-            const Text("Blood group"),
-            const Text("Address"),
+            FutureBuilder(
+              future: Repository.getUser(),
+                builder: (BuildContext context,AsyncSnapshot<Map<String, dynamic>> map){
+                if(map.hasData && map.data!.isNotEmpty){
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(map.data?['address']??"update address"),
+                        Text(map.data?['pin_code']??"update pin code"),
+                        Text(map.data?['blood_group']??"update blood group"),
+                      ],
+                    );
+                  }
+                  if(map.hasError){
+                    return const Text("Some error occurred");
+                  }
+                  return const Text("Loading...");
+                }
+            ),
           ],
         ),
       ),

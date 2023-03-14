@@ -36,6 +36,7 @@ class _ProfileState extends State<Profile> {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
                 Button("Edit Profile", (){
                   Navigator.pushNamed(context, '/home/profile/edit_profile');
+                  _showLoader(context);
                 }),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
               ],
@@ -43,6 +44,18 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
+    );
+  }
+
+  static _showLoader(BuildContext context){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context){
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
     );
   }
 }

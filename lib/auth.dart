@@ -1,3 +1,4 @@
+import 'package:bloodnate/database/repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -35,10 +36,17 @@ class Auth{
           ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Account created successfully, please verify email to sign in"),backgroundColor: Colors.green,)
           );
-          await value.user?.updateDisplayName(name).then((v){
+          await value.user?.updateDisplayName(name).then((v) async {
             value.user?.updateDisplayName(name);
             value.user?.sendEmailVerification();
-            Navigator.pop(context);
+            await Repository.addUser(
+                {
+                  'name':name,
+                  'email':email
+                }
+            ).then((value){
+              Navigator.pop(context);
+            });
           });
     }).onError((error, stackTrace){
       Navigator.pop(context);
