@@ -2,6 +2,7 @@ import 'package:bloodnate/auth.dart';
 import 'package:bloodnate/database/repository.dart';
 import 'package:bloodnate/widget/button.dart';
 import 'package:bloodnate/widget/text_input_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class EditProfile extends StatefulWidget {
@@ -23,11 +24,11 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     name.text = user?.displayName??"";
     email.text = user?.email??"";
-    final repository = Repository(context);
-    repository.userCollection.doc(Auth.user?.uid).get().then((value){
-      phone.text = value.data()!['phone']??"";
-      address.text = value.data()!['address']??"";
-      pinCode.text = value.data()!['pin_code']??"";
+    Repository.userCollection.doc(Auth.user?.uid).get().then((value){
+      phone.text = value.data()?['phone']??"";
+      address.text = value.data()?['address']??"";
+      pinCode.text = value.data()?['pin_code']??"";
+      Navigator.pop(context);
     });
     return Scaffold(
       appBar: AppBar(
@@ -62,19 +63,56 @@ class _EditProfileState extends State<EditProfile> {
               const Divider(thickness: 1,color: Colors.grey,),
               const Padding(padding: EdgeInsets.symmetric(vertical: 6)),
               Button("Save Changes", (){
-                repository.updateUser({
-                  "name":name.text.trim(),
-                  "email":email.text.trim(),
-                  "phone":phone.text.trim(),
-                  "address":address.text.trim(),
-                  "pin_code":pinCode.text.trim(),
-                });
-              }),
+                if(name.text.trim().isNotEmpty && email.text.trim().isNotEmpty && phone.text.trim().isNotEmpty && address.text.trim().isNotEmpty && pinCode.text.trim().isNotEmpty){
+                  _showLoader(context);
+                  Repository.updateUser({
+                    "name":name.text.trim(),
+                    "email":email.text.trim(),
+                    "phone":phone.text.trim(),
+                    "address":address.text.trim(),
+                    "pin_code":pinCode.text.trim(),
+                    }).then((value){
+                      Navigator.popUntil(context,ModalRoute.withName('/'));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Changes saved"),backgroundColor: Colors.green,)
+                      );
+                  }).onError((error, stackTrace){
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Some error occurred please try again"),backgroundColor: Colors.red,)
+                    );
+                    if((error as FirebaseException).code == 'not-found'){
+                      Repository.addUser({
+                        "name":name.text.trim(),
+                        "email":email.text.trim(),
+                        "phone":phone.text.trim(),
+                        "address":address.text.trim(),
+                        "pin_code":pinCode.text.trim(),
+                      });
+                    }
+                  });
+                  }else{
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("fields cannot be empty"),backgroundColor: Colors.red,)
+                  );
+                }
+                }),
               const Padding(padding: EdgeInsets.symmetric(vertical: 12)),
             ],
           ),
         ),
       ),
+    );
+  }
+  _showLoader(BuildContext context){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context){
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
     );
   }
 }
